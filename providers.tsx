@@ -1,4 +1,4 @@
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 
 export default function Providers({
     children,
@@ -6,8 +6,9 @@ export default function Providers({
     children: React.ReactNode;
 }>) {
     return (
-        <NextUIProvider>
+        <HeroUIProvider>
             {children}
-        </NextUIProvider>
+        </HeroUIProvider>
     );
 }
+

@@ -1,5 +1,5 @@
 'use client';
-import { Input, Button } from "@nextui-org/react";
+import { Input, Button } from "@heroui/react";
 import Link from "next/link";
 import axios from "axios";
 import { API_URL } from "../../../constants";
@@ -9,10 +9,10 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
   const [submitting, setSubmitting] = useState((false))
   const router = useRouter();
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setSubmitting(true);
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
     let authData: any = {}
     authData.userEmail = formData.get("userEmail");
     authData.userPassword = formData.get("userPassword");
