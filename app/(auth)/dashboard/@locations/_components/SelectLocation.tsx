@@ -3,9 +3,13 @@ import { Location } from "@/entities";
 import { Select, SelectItem } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
-export default function SelectLocation({ locations, store }: { locations: Location[], store: string | string[] | undefined }) {
+export default function SelectLocation({ 
+    locations, 
+    store }: { 
+        locations: Location[], 
+        store: string | string[] | undefined;
+     }) {
     const router = useRouter();
-    if (!store) return null;
 
     return (
         <Select
@@ -15,13 +19,14 @@ export default function SelectLocation({ locations, store }: { locations: Locati
                 mainWrapper: "hover:ring-2 ring-red-300 rounded-xl transition-all",
 
             }}
-            onChange={(e) => {
-                if (e.target.value == "") {
+            selectedKeys={store? store: "0"}
+            onChange={((e) => {
+                if (e.target.value == "0" || e.target.value == "" ) {
                     router.push(`/dashboard`);
                 } else {
-                    router.push(`/dashboard?store=${e.target.value}`);
+                    router.push(`/dashboard?store=${e.target.value}`)
                 }
-            }}
+            })}
         >
             {locations.map((location: Location) => {
                 return (

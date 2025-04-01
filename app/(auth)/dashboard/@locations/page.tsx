@@ -10,7 +10,7 @@ const LocationsPage = async ({ searchParams }: {
 }) => {
     const userCookies = cookies();
     const token = userCookies.get(TOKEN_NAME)?.value;
-    const { data } = await axios.get<Location[]>(
+    let { data } = await axios.get<Location[]>(
         "http://127.0.0.1:4000/locations",
         {
             headers: {
@@ -18,6 +18,18 @@ const LocationsPage = async ({ searchParams }: {
             },
         },
     );
+
+    data = [
+        
+            {
+                locationId:0,
+                locationName: "Ninguna",
+                locationLatLng: [0,0],
+                locationAddress: "No existe"
+            },
+            ...data 
+    ]
+       
 
     return (
         <div className="w-8/12">
