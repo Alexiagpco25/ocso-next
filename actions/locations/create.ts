@@ -1,15 +1,15 @@
 "use server";
-import axios from "axios";
-import { cookies } from "next/headers";
-import { TOKEN_NAME, API_URL } from "@/constants";
+import { API_URL } from "@/constants";
+import { Location } from "@/entities";
+import { authHeaders } from "@/helpers/authHeaders";
+import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createLocation(formData: FormData) {
-  const token = cookies().get(TOKEN_NAME)?.value;
-  if (!token) return;
   let location: any = {};
   let locationLatLng = [0, 0];
   for (const key of formData.keys()) {
-    const value = formData.get(key);
+    const value = formData.get(key)
     if (value) {
       if (key === "locationLat") {
         locationLatLng[0] = +value;
@@ -20,16 +20,19 @@ export async function createLocation(formData: FormData) {
       }
     }
   }
-  location.locationLatLng = locationLatLng;
-  await axios.post(
-    `${API_URL}/locations`,
-    {
-      ...location,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  location.locationLatLng = locationLatLng
+  const response = await fetch(`${API_URL}/locations`, {
+    method: "POST",
+    body: JSON.stringify(location),
+    headers: {
+      'content-type': 'application/json',
+      ...authHeaders()
     }
-  );
+  })
+  const { locationId }: Location = await response.json()
+  if (response.status === 201) {
+    revalidateTag("dashboard:locations");
+    redirect(`/dashboard?store=${locationId}`)
+  }
+
 }

@@ -1,21 +1,23 @@
 import { Location } from "@/entities";
-import axios from "axios";
 import { Card, CardHeader, CardBody, Divider } from "@heroui/react";
-import { API_URL} from "@/constants";
-import Link from "next/link";
+import { API_URL } from "@/constants";
 import { authHeaders } from "@/helpers/authHeaders";
-
+import Link from "next/link";
 export default async function LocationCard({
   store,
 }: {
   store: string | string[] | undefined;
 }) {
   if (!store) return null;
-  const { data } = await axios.get<Location>(`${API_URL}/locations/${store}`, {
+  const response = await fetch(`${API_URL}/locations/${store}`, {
     headers: {
       ...authHeaders()
     },
+    next: {
+      tags: ["dashboard:locations", `dashboard:locations:${store}`]
+    }
   });
+  const data: Location = await response.json()
   return (
     <Card>
       <CardHeader>
@@ -25,17 +27,17 @@ export default async function LocationCard({
       <CardBody className="flex flex-col w-full items-center">
         <p className="w-full">
           Manager:{" "}
-          <Link href={{ pathname: `/dashboard/managers` }}>
-            <b>{data.manager?.managerFullName}</b>
+            <Link href={{ pathname: `/dashboard/managers/${data.manager?.managerId}` }}>
+            <b className="underline">{data.manager?.managerFullName}</b>
           </Link>
         </p>
         <p className="w-full">
-            Direccion: <b>{data.locationAddress}</b>
+            Dirección: <b>{data.locationAddress}</b>
         </p>
-        <iframe
-        className="border-2 border-orange-800 rounded-md my-2"
-          width="300"
-          height="200"
+          <iframe
+            className="border-2 border-orange-800 rounded-md my-2"
+            width="300"
+            height="200"
           src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyAmASbJF8HAq_QXRRgMHCTLzbbiCPZTYXk
     &q=${data.locationLatLng[0]},${data.locationLatLng[1]}`}>
         </iframe>
