@@ -3,7 +3,9 @@ import { API_URL } from "@/constants";
 import SelectLocation from "./_components/SelectLocation";
 import LocationCard from "./_components/LocationCard";
 import FormNewLocation from "./_components/FormNewLocation";
+import FormUpdateLocation from "./_components/FormUpdateLocation";
 import DeleteLocationButton from "./_components/DeleteLocationButton";
+import UpdateLocation from "./_components/UpdateLocation";
 import { authHeaders } from "@/helpers/authHeaders";
 
 const LocationsPage = async ({
@@ -43,7 +45,10 @@ const LocationsPage = async ({
           <FormNewLocation store={searchParams.store} />
         </div>
         <div className="flex flex-row flex-grow-0 gap-10  items-center">
-          <DeleteLocationButton store={searchParams.store} />
+        <DeleteLocationButton store={searchParams.store} />
+        <UpdateLocation store={searchParams.store}>
+          <FormUpdateLocation store={searchParams.store}/>
+        </UpdateLocation>
         </div>
       </div>
     </div>

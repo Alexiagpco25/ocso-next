@@ -19,6 +19,10 @@ export default function LoginPage() {
       const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         body: JSON.stringify(authData),
+        headers: {
+          "content-type": 'application/json'
+        },
+        cache: "no-cache",
         credentials: 'include',
       });
       if (response.status == 201) router.push('/dashboard')
@@ -34,7 +38,7 @@ export default function LoginPage() {
       <p className="text-2xl my-4 text-white">
         Iniciar sesión
       </p>
-      <div className="flex flex-col gap-4 my-4 items-center">
+      <div className="flex flex-col gap-2 my-4 items-center">
         <Input label="Email" name="userEmail" type="email" required size="sm" />
         <Input label="Contraseña" name="userPassword" type="password" required size="sm" />
 

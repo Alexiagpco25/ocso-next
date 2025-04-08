@@ -25,7 +25,7 @@ export default async function FormNewLocation({
       ...authHeaders(),
     },
     next: {
-      tags: ["dashboard:locations"],
+      tags: ["dashboard:locations"]
     }
   })
   const dataLocations: Location[] = await responseLocations.json();
@@ -61,8 +61,7 @@ export default async function FormNewLocation({
       />
       <SelectManager managers={dataManagers} locations={dataLocations} />
       <Button type="submit" color="primary">
-        {" "}
-        Subir{" "}
+      Subir
       </Button>
     </form>
   );

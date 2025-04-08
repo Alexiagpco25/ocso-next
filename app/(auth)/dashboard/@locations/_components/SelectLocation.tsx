@@ -10,7 +10,6 @@ export default function SelectLocation({
         store: string | string[] | undefined;
      }) {
     const router = useRouter();
-
     return (
         <Select
             placeholder="Selecciona una tienda"
