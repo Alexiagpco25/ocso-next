@@ -4,6 +4,7 @@ import { Button, Input } from "@heroui/react";
 import SelectStore from "./SelectStore";
 import { API_URL } from "@/constants";
 import { authHeaders } from "@/helpers/authHeaders";
+
 export default async function FormUpdateManager({
   manager,
 }: {
