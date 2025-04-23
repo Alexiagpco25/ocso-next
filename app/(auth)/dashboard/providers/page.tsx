@@ -7,7 +7,6 @@ import ProviderCard from "./_components/ProviderCard";
 import { LuPlus } from "react-icons/lu";
 import CreateProvider from "./_components/CreateProvider";
 import FormCreateProvider from "./_components/FormCreateProvider";
-
 const ProviderPage = async () => {
   const response = await fetch(`${API_URL}/providers`, {
     headers: {
@@ -18,7 +17,7 @@ const ProviderPage = async () => {
     }
   });
   const providers: Provider[] = await response.json();
-  console.log("Providers:", providers);
+
   return (
     <div className="flex flex-grow-0 flex-col items-end w-full px-10 pt-10 h-[90vh]">
       <CreateProvider>

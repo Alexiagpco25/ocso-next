@@ -47,4 +47,5 @@ export interface Provider {
     countSeal: number;
     provider: Provider
   }
+
   

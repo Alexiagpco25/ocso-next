@@ -5,7 +5,6 @@ import { Product, Provider } from "@/entities";
 import ProductCard from "./_components/ProductCard";
 import FormUpdateProvider from "./_components/FormUpdateProvider";
 import Link from "next/link";
-
 export default async function ProviderPage({
   params,
 }: {
