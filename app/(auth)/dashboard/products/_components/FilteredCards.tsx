@@ -49,7 +49,7 @@ export default function FilteredCards({
         }}
         label="Nombre del producto"
       />
-      {productsList.map((product) => {
+      {show && productsList.map((product) => {
         return (
           <Link
             className="hover:scale-110 transition-transform"

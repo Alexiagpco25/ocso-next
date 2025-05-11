@@ -1,7 +1,7 @@
 import createProduct from "@/actions/products/create";
 import { API_URL } from "@/constants";
 import { authHeaders } from "@/helpers/authHeaders";
-import { Input, Button } from "@nextui-org/react";
+import { Input, Button } from "@heroui/react";
 import { LuDollarSign } from "react-icons/lu";
 import SelectProvider from "./_components/SelectProvider";
 const ProductsPage = async () => {
